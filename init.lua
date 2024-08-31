@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -200,9 +200,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', 'f', 'zc', { desc = 'Fold' })
 vim.keymap.set('n', 'F', 'zO', { desc = 'Fold' })
-vim.keymap.set('n', '<leader>l', ':bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<leader>h', ':bprevious<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<leader>d', ':bprevious<CR>:bdelete #<CR>', { desc = 'Delete buffer' })
+vim.keymap.set('n', '<leader>l', ':BufferNext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>h', ':BufferPrevious<CR>', { desc = 'Previous buffer' })
+--vim.keymap.set('n', '<leader>d', ':bprevious<CR>:bdelete #<CR>', { desc = 'Delete buffer' })
+vim.keymap.set('n', '<leader>d', ':BufferClose<CR>', { desc = 'Delete buffer' })
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Open Explore' })
 
 -- [[ Basic Autocommands ]]
@@ -247,6 +248,8 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'navarasu/onedark.nvim',
   'nvim-tree/nvim-tree.lua',
+  'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -398,11 +401,14 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<c-enter>'] = 'to_fuzzy_refine',
+              ['<Enter>'] = 'file_tab',
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -939,6 +945,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'custom.plugins.barbar',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
