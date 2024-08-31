@@ -119,6 +119,7 @@ vim.keymap.set('n', '<leader>h', ':BufferPrevious<CR>', { desc = 'Previous buffe
 --vim.keymap.set('n', '<leader>d', ':bprevious<CR>:bdelete #<CR>', { desc = 'Delete buffer' })
 vim.keymap.set('n', '<leader>d', ':BufferClose<CR>', { desc = 'Delete buffer' })
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Open Explore' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -860,6 +861,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'custom.plugins.barbar',
+  require 'custom.plugins.oil',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -902,6 +904,7 @@ vim.opt.termguicolors = true
 
 -- empty setup using defaults
 require('nvim-tree').setup()
+require('oil').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
